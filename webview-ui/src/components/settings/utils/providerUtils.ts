@@ -48,6 +48,7 @@ import {
 	openAiNativeModels,
 	openRouterDefaultModelId,
 	openRouterDefaultModelInfo,
+	poolsideModelInfoSaneDefaults,
 	qwenCodeDefaultModelId,
 	qwenCodeModels,
 	requestyDefaultModelId,
@@ -345,6 +346,16 @@ export function normalizeApiConfiguration(
 						? fireworksModels[fireworksModelId as keyof typeof fireworksModels]
 						: fireworksModels[fireworksDefaultModelId],
 			}
+		case "poolside":
+			const poolsideModelId =
+				currentMode === "plan" ? apiConfiguration?.planModePoolsideModelId : apiConfiguration?.actModePoolsideModelId
+			const poolsideModelInfo =
+				currentMode === "plan" ? apiConfiguration?.planModePoolsideModelInfo : apiConfiguration?.actModePoolsideModelInfo
+			return {
+				selectedProvider: provider,
+				selectedModelId: poolsideModelId || "",
+				selectedModelInfo: poolsideModelInfo || poolsideModelInfoSaneDefaults,
+			}
 		default:
 			return getProviderData(anthropicModels, anthropicDefaultModelId)
 	}
@@ -377,6 +388,7 @@ export function getModeSpecificFields(apiConfiguration: ApiConfiguration | undef
 			huggingFaceModelId: undefined,
 			huaweiCloudMaasModelId: undefined,
 			vercelAiGatewayModelId: undefined,
+			poolsideModelId: undefined,
 
 			// Model info objects
 			openAiModelInfo: undefined,
@@ -387,6 +399,7 @@ export function getModeSpecificFields(apiConfiguration: ApiConfiguration | undef
 			basetenModelInfo: undefined,
 			huggingFaceModelInfo: undefined,
 			vercelAiGatewayModelInfo: undefined,
+			poolsideModelInfo: undefined,
 			vsCodeLmModelSelector: undefined,
 
 			// AWS Bedrock fields
@@ -425,6 +438,7 @@ export function getModeSpecificFields(apiConfiguration: ApiConfiguration | undef
 			mode === "plan" ? apiConfiguration.planModeHuaweiCloudMaasModelId : apiConfiguration.actModeHuaweiCloudMaasModelId,
 		vercelAiGatewayModelId:
 			mode === "plan" ? apiConfiguration.planModeVercelAiGatewayModelId : apiConfiguration.actModeVercelAiGatewayModelId,
+		poolsideModelId: mode === "plan" ? apiConfiguration.planModePoolsideModelId : apiConfiguration.actModePoolsideModelId,
 
 		// Model info objects
 		openAiModelInfo: mode === "plan" ? apiConfiguration.planModeOpenAiModelInfo : apiConfiguration.actModeOpenAiModelInfo,
@@ -441,6 +455,8 @@ export function getModeSpecificFields(apiConfiguration: ApiConfiguration | undef
 			mode === "plan"
 				? apiConfiguration.planModeVercelAiGatewayModelInfo
 				: apiConfiguration.actModeVercelAiGatewayModelInfo,
+		poolsideModelInfo:
+			mode === "plan" ? apiConfiguration.planModePoolsideModelInfo : apiConfiguration.actModePoolsideModelInfo,
 		vsCodeLmModelSelector:
 			mode === "plan" ? apiConfiguration.planModeVsCodeLmModelSelector : apiConfiguration.actModeVsCodeLmModelSelector,
 
@@ -569,6 +585,13 @@ export async function syncModeConfigurations(
 		case "fireworks":
 			updates.planModeFireworksModelId = sourceFields.fireworksModelId
 			updates.actModeFireworksModelId = sourceFields.fireworksModelId
+			break
+
+		case "poolside":
+			updates.planModePoolsideModelId = sourceFields.poolsideModelId
+			updates.actModePoolsideModelId = sourceFields.poolsideModelId
+			updates.planModePoolsideModelInfo = sourceFields.poolsideModelInfo
+			updates.actModePoolsideModelInfo = sourceFields.poolsideModelInfo
 			break
 
 		case "bedrock":

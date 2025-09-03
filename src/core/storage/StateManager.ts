@@ -255,6 +255,8 @@ export class StateManager {
 			difyBaseUrl,
 			vercelAiGatewayApiKey,
 			zaiApiKey,
+			poolsideApiKey,
+			poolsideBaseUrl,
 			requestTimeoutMs,
 			// Plan mode configurations
 			planModeApiProvider,
@@ -287,6 +289,8 @@ export class StateManager {
 			planModeHuaweiCloudMaasModelInfo,
 			planModeVercelAiGatewayModelId,
 			planModeVercelAiGatewayModelInfo,
+			planModePoolsideModelId,
+			planModePoolsideModelInfo,
 			// Act mode configurations
 			actModeApiProvider,
 			actModeApiModelId,
@@ -318,6 +322,8 @@ export class StateManager {
 			actModeHuaweiCloudMaasModelInfo,
 			actModeVercelAiGatewayModelId,
 			actModeVercelAiGatewayModelInfo,
+			actModePoolsideModelId,
+			actModePoolsideModelInfo,
 		} = apiConfiguration
 
 		// Batch update global state keys
@@ -353,6 +359,8 @@ export class StateManager {
 			planModeHuaweiCloudMaasModelInfo,
 			planModeVercelAiGatewayModelId,
 			planModeVercelAiGatewayModelInfo,
+			planModePoolsideModelId,
+			planModePoolsideModelInfo,
 
 			// Act mode configuration updates
 			actModeApiProvider,
@@ -385,6 +393,8 @@ export class StateManager {
 			actModeHuaweiCloudMaasModelInfo,
 			actModeVercelAiGatewayModelId,
 			actModeVercelAiGatewayModelInfo,
+			actModePoolsideModelId,
+			actModePoolsideModelInfo,
 
 			// Global state updates
 			awsRegion,
@@ -423,6 +433,7 @@ export class StateManager {
 			claudeCodePath,
 			difyBaseUrl,
 			qwenCodeOauthPath,
+			poolsideBaseUrl,
 		})
 
 		// Batch update secrets
@@ -461,6 +472,7 @@ export class StateManager {
 			difyApiKey,
 			vercelAiGatewayApiKey,
 			zaiApiKey,
+			poolsideApiKey,
 		})
 	}
 
@@ -690,6 +702,8 @@ export class StateManager {
 			difyBaseUrl,
 			vercelAiGatewayApiKey,
 			zaiApiKey,
+			poolsideApiKey,
+			poolsideBaseUrl,
 			requestTimeoutMs,
 			authNonce,
 			// Plan mode configurations
@@ -723,6 +737,8 @@ export class StateManager {
 			planModeHuaweiCloudMaasModelInfo,
 			planModeVercelAiGatewayModelId,
 			planModeVercelAiGatewayModelInfo,
+			planModePoolsideModelId,
+			planModePoolsideModelInfo,
 			// Act mode configurations
 			actModeApiProvider,
 			actModeApiModelId,
@@ -754,6 +770,8 @@ export class StateManager {
 			actModeHuaweiCloudMaasModelInfo,
 			actModeVercelAiGatewayModelId,
 			actModeVercelAiGatewayModelInfo,
+			actModePoolsideModelId,
+			actModePoolsideModelInfo,
 		} = state.apiConfiguration || {}
 
 		// Directly populate global state cache without triggering persistence
@@ -851,6 +869,8 @@ export class StateManager {
 			actModeHuaweiCloudMaasModelInfo,
 			actModeVercelAiGatewayModelId,
 			actModeVercelAiGatewayModelInfo,
+			actModePoolsideModelId,
+			actModePoolsideModelInfo,
 
 			// API configuration global state updates
 			awsRegion,
@@ -890,6 +910,9 @@ export class StateManager {
 			claudeCodePath,
 			difyBaseUrl,
 			qwenCodeOauthPath,
+			poolsideBaseUrl,
+			planModePoolsideModelId,
+			planModePoolsideModelInfo,
 		} satisfies GlobalState
 
 		// Populate global state cache directly
@@ -932,6 +955,7 @@ export class StateManager {
 			difyApiKey,
 			vercelAiGatewayApiKey,
 			zaiApiKey,
+			poolsideApiKey,
 		} satisfies Secrets
 
 		// Populate secrets cache directly
@@ -988,6 +1012,7 @@ export class StateManager {
 			difyApiKey: this.secretsCache["difyApiKey"],
 			vercelAiGatewayApiKey: this.secretsCache["vercelAiGatewayApiKey"],
 			zaiApiKey: this.secretsCache["zaiApiKey"],
+			poolsideApiKey: this.secretsCache["poolsideApiKey"],
 
 			// Global state
 			awsRegion: this.globalStateCache["awsRegion"],
@@ -1026,6 +1051,7 @@ export class StateManager {
 			claudeCodePath: this.globalStateCache["claudeCodePath"],
 			qwenCodeOauthPath: this.globalStateCache["qwenCodeOauthPath"],
 			difyBaseUrl: this.globalStateCache["difyBaseUrl"],
+			poolsideBaseUrl: this.globalStateCache["poolsideBaseUrl"],
 
 			// Plan mode configurations
 			planModeApiProvider: this.globalStateCache["planModeApiProvider"],
@@ -1058,6 +1084,8 @@ export class StateManager {
 			planModeHuaweiCloudMaasModelInfo: this.globalStateCache["planModeHuaweiCloudMaasModelInfo"],
 			planModeVercelAiGatewayModelId: this.globalStateCache["planModeVercelAiGatewayModelId"],
 			planModeVercelAiGatewayModelInfo: this.globalStateCache["planModeVercelAiGatewayModelInfo"],
+			planModePoolsideModelId: this.globalStateCache["planModePoolsideModelId"],
+			planModePoolsideModelInfo: this.globalStateCache["planModePoolsideModelInfo"],
 
 			// Act mode configurations
 			actModeApiProvider: this.globalStateCache["actModeApiProvider"],
@@ -1090,6 +1118,8 @@ export class StateManager {
 			actModeHuaweiCloudMaasModelInfo: this.globalStateCache["actModeHuaweiCloudMaasModelInfo"],
 			actModeVercelAiGatewayModelId: this.globalStateCache["actModeVercelAiGatewayModelId"],
 			actModeVercelAiGatewayModelInfo: this.globalStateCache["actModeVercelAiGatewayModelInfo"],
+			actModePoolsideModelId: this.globalStateCache["actModePoolsideModelId"],
+			actModePoolsideModelInfo: this.globalStateCache["actModePoolsideModelInfo"],
 		}
 	}
 }

@@ -32,6 +32,7 @@ import { OllamaProvider } from "./providers/OllamaProvider"
 import { OpenAICompatibleProvider } from "./providers/OpenAICompatible"
 import { OpenAINativeProvider } from "./providers/OpenAINative"
 import { OpenRouterProvider } from "./providers/OpenRouterProvider"
+import { PoolsideProvider } from "./providers/PoolsideProvider"
 import { QwenCodeProvider } from "./providers/QwenCodeProvider"
 import { QwenProvider } from "./providers/QwenProvider"
 import { RequestyProvider } from "./providers/RequestyProvider"
@@ -176,6 +177,7 @@ const ApiOptions = ({ showModelOptions, apiErrorMessage, modelIdErrorMessage, is
 					<VSCodeOption value="sambanova">SambaNova</VSCodeOption>
 					<VSCodeOption value="huawei-cloud-maas">Huawei Cloud MaaS</VSCodeOption>
 					<VSCodeOption value="dify">Dify.ai</VSCodeOption>
+					<VSCodeOption value="poolside">poolside</VSCodeOption>
 				</VSCodeDropdown>
 			</DropdownContainer>
 
@@ -313,6 +315,10 @@ const ApiOptions = ({ showModelOptions, apiErrorMessage, modelIdErrorMessage, is
 
 			{apiConfiguration && selectedProvider === "zai" && (
 				<ZAiProvider currentMode={currentMode} isPopup={isPopup} showModelOptions={showModelOptions} />
+			)}
+
+			{apiConfiguration && selectedProvider === "poolside" && (
+				<PoolsideProvider currentMode={currentMode} isPopup={isPopup} showModelOptions={showModelOptions} />
 			)}
 
 			{apiErrorMessage && (

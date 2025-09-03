@@ -72,6 +72,8 @@ export function convertApiConfigurationToProtoApiConfiguration(config: ApiConfig
 		vercelAiGatewayApiKey: config.vercelAiGatewayApiKey,
 		difyBaseUrl: config.difyBaseUrl,
 		difyApiKey: config.difyApiKey,
+		poolsideApiKey: config.poolsideApiKey,
+		poolsideBaseUrl: config.poolsideBaseUrl,
 
 		// Plan mode configurations
 		planModeApiProvider: config.planModeApiProvider,
@@ -106,6 +108,10 @@ export function convertApiConfigurationToProtoApiConfiguration(config: ApiConfig
 		planModeVercelAiGatewayModelInfo: config.planModeVercelAiGatewayModelInfo
 			? JSON.stringify(config.planModeVercelAiGatewayModelInfo)
 			: undefined,
+		planModePoolsideModelId: config.planModePoolsideModelId,
+		planModePoolsideModelInfo: config.planModePoolsideModelInfo
+			? JSON.stringify(config.planModePoolsideModelInfo)
+			: undefined,
 
 		// Act mode configurations
 		actModeApiProvider: config.actModeApiProvider,
@@ -136,6 +142,8 @@ export function convertApiConfigurationToProtoApiConfiguration(config: ApiConfig
 		actModeVercelAiGatewayModelInfo: config.actModeVercelAiGatewayModelInfo
 			? JSON.stringify(config.actModeVercelAiGatewayModelInfo)
 			: undefined,
+		actModePoolsideModelId: config.actModePoolsideModelId,
+		actModePoolsideModelInfo: config.actModePoolsideModelInfo ? JSON.stringify(config.actModePoolsideModelInfo) : undefined,
 
 		// Favorited model IDs
 		favoritedModelIds: config.favoritedModelIds || [],
@@ -212,6 +220,8 @@ export function convertProtoApiConfigurationToApiConfiguration(protoConfig: Prot
 		vercelAiGatewayApiKey: protoConfig.vercelAiGatewayApiKey,
 		difyApiKey: protoConfig.difyApiKey,
 		difyBaseUrl: protoConfig.difyBaseUrl,
+		poolsideApiKey: protoConfig.poolsideApiKey,
+		poolsideBaseUrl: protoConfig.poolsideBaseUrl,
 
 		// Plan mode configurations
 		planModeApiProvider: protoConfig.planModeApiProvider as ApiProvider,
@@ -232,6 +242,7 @@ export function convertProtoApiConfigurationToApiConfiguration(protoConfig: Prot
 		planModeFireworksModelId: protoConfig.planModeFireworksModelId,
 		planModeSapAiCoreModelId: protoConfig.planModeSapAiCoreModelId,
 		planModeVercelAiGatewayModelId: protoConfig.planModeVercelAiGatewayModelId,
+		planModePoolsideModelId: protoConfig.planModePoolsideModelId,
 
 		// Act mode configurations
 		actModeApiProvider: protoConfig.actModeApiProvider as ApiProvider,
@@ -252,6 +263,7 @@ export function convertProtoApiConfigurationToApiConfiguration(protoConfig: Prot
 		actModeFireworksModelId: protoConfig.actModeFireworksModelId,
 		actModeSapAiCoreModelId: protoConfig.actModeSapAiCoreModelId,
 		actModeVercelAiGatewayModelId: protoConfig.actModeVercelAiGatewayModelId,
+		actModePoolsideModelId: protoConfig.actModePoolsideModelId,
 
 		// Favorited model IDs
 		favoritedModelIds: protoConfig.favoritedModelIds || [],
@@ -297,6 +309,12 @@ export function convertProtoApiConfigurationToApiConfiguration(protoConfig: Prot
 		}
 		if (protoConfig.actModeVercelAiGatewayModelInfo) {
 			config.actModeVercelAiGatewayModelInfo = JSON.parse(protoConfig.actModeVercelAiGatewayModelInfo)
+		}
+		if (protoConfig.planModePoolsideModelInfo) {
+			config.planModePoolsideModelInfo = JSON.parse(protoConfig.planModePoolsideModelInfo)
+		}
+		if (protoConfig.actModePoolsideModelInfo) {
+			config.actModePoolsideModelInfo = JSON.parse(protoConfig.actModePoolsideModelInfo)
 		}
 	} catch (error) {
 		console.error("Failed to parse complex JSON objects in API configuration:", error)

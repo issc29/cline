@@ -83,6 +83,7 @@ export interface GlobalState {
 	focusChainFeatureFlagEnabled: boolean
 	customPrompt: "compact" | undefined
 	difyBaseUrl: string | undefined
+	poolsideBaseUrl: string | undefined
 
 	// Plan mode configurations
 	planModeApiProvider: ApiProvider
@@ -113,6 +114,10 @@ export interface GlobalState {
 	planModeHuggingFaceModelInfo: ModelInfo | undefined
 	planModeHuaweiCloudMaasModelId: string | undefined
 	planModeHuaweiCloudMaasModelInfo: ModelInfo | undefined
+	planModeVercelAiGatewayModelId: string | undefined
+	planModeVercelAiGatewayModelInfo: ModelInfo | undefined
+	planModePoolsideModelId: string | undefined
+	planModePoolsideModelInfo: ModelInfo | undefined
 	// Act mode configurations
 	actModeApiProvider: ApiProvider
 	actModeApiModelId: string | undefined
@@ -142,10 +147,10 @@ export interface GlobalState {
 	actModeHuggingFaceModelInfo: ModelInfo | undefined
 	actModeHuaweiCloudMaasModelId: string | undefined
 	actModeHuaweiCloudMaasModelInfo: ModelInfo | undefined
-	planModeVercelAiGatewayModelId: string | undefined
-	planModeVercelAiGatewayModelInfo: ModelInfo | undefined
 	actModeVercelAiGatewayModelId: string | undefined
 	actModeVercelAiGatewayModelInfo: ModelInfo | undefined
+	actModePoolsideModelId: string | undefined
+	actModePoolsideModelInfo: ModelInfo | undefined
 }
 
 export interface Secrets {
@@ -184,6 +189,7 @@ export interface Secrets {
 	basetenApiKey: string | undefined
 	vercelAiGatewayApiKey: string | undefined
 	difyApiKey: string | undefined
+	poolsideApiKey: string | undefined
 }
 
 export interface LocalState {

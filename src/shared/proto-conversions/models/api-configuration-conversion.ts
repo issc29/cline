@@ -256,6 +256,8 @@ function convertApiProviderToProto(provider: string | undefined): ProtoApiProvid
 			return ProtoApiProvider.ZAI
 		case "dify":
 			return ProtoApiProvider.DIFY
+		case "poolside":
+			return ProtoApiProvider.POOLSIDE
 		default:
 			return ProtoApiProvider.ANTHROPIC
 	}
@@ -334,6 +336,8 @@ function convertProtoToApiProvider(provider: ProtoApiProvider): ApiProvider {
 			return "zai"
 		case ProtoApiProvider.DIFY:
 			return "dify"
+		case ProtoApiProvider.POOLSIDE:
+			return "poolside"
 		default:
 			return "anthropic"
 	}
@@ -413,6 +417,8 @@ export function convertApiConfigurationToProto(config: ApiConfiguration): ProtoA
 		zaiApiKey: config.zaiApiKey,
 		difyApiKey: config.difyApiKey,
 		difyBaseUrl: config.difyBaseUrl,
+		poolsideApiKey: config.poolsideApiKey,
+		poolsideBaseUrl: config.poolsideBaseUrl,
 
 		// Plan mode configurations
 		planModeApiProvider: config.planModeApiProvider ? convertApiProviderToProto(config.planModeApiProvider) : undefined,
@@ -445,6 +451,8 @@ export function convertApiConfigurationToProto(config: ApiConfiguration): ProtoA
 		planModeHuaweiCloudMaasModelInfo: convertModelInfoToProtoOpenRouter(config.planModeHuaweiCloudMaasModelInfo),
 		planModeVercelAiGatewayModelId: config.planModeVercelAiGatewayModelId,
 		planModeVercelAiGatewayModelInfo: convertModelInfoToProtoOpenRouter(config.planModeVercelAiGatewayModelInfo),
+		planModePoolsideModelId: config.planModePoolsideModelId,
+		planModePoolsideModelInfo: convertModelInfoToProtoOpenRouter(config.planModePoolsideModelInfo),
 
 		// Act mode configurations
 		actModeApiProvider: config.actModeApiProvider ? convertApiProviderToProto(config.actModeApiProvider) : undefined,
@@ -477,6 +485,8 @@ export function convertApiConfigurationToProto(config: ApiConfiguration): ProtoA
 		actModeHuaweiCloudMaasModelInfo: convertModelInfoToProtoOpenRouter(config.actModeHuaweiCloudMaasModelInfo),
 		actModeVercelAiGatewayModelId: config.actModeVercelAiGatewayModelId,
 		actModeVercelAiGatewayModelInfo: convertModelInfoToProtoOpenRouter(config.actModeVercelAiGatewayModelInfo),
+		actModePoolsideModelId: config.actModePoolsideModelId,
+		actModePoolsideModelInfo: convertModelInfoToProtoOpenRouter(config.actModePoolsideModelInfo),
 
 		// Favorited model IDs
 		favoritedModelIds: config.favoritedModelIds || [],
@@ -557,6 +567,8 @@ export function convertProtoToApiConfiguration(protoConfig: ProtoApiConfiguratio
 		zaiApiKey: protoConfig.zaiApiKey,
 		difyApiKey: protoConfig.difyApiKey,
 		difyBaseUrl: protoConfig.difyBaseUrl,
+		poolsideApiKey: protoConfig.poolsideApiKey,
+		poolsideBaseUrl: protoConfig.poolsideBaseUrl,
 
 		// Plan mode configurations
 		planModeApiProvider:
@@ -592,6 +604,8 @@ export function convertProtoToApiConfiguration(protoConfig: ProtoApiConfiguratio
 		planModeHuaweiCloudMaasModelInfo: convertProtoToModelInfo(protoConfig.planModeHuaweiCloudMaasModelInfo),
 		planModeVercelAiGatewayModelId: protoConfig.planModeVercelAiGatewayModelId,
 		planModeVercelAiGatewayModelInfo: convertProtoToModelInfo(protoConfig.planModeVercelAiGatewayModelInfo),
+		planModePoolsideModelId: protoConfig.planModePoolsideModelId,
+		planModePoolsideModelInfo: convertProtoToModelInfo(protoConfig.planModePoolsideModelInfo),
 
 		// Act mode configurations
 		actModeApiProvider:
@@ -625,6 +639,8 @@ export function convertProtoToApiConfiguration(protoConfig: ProtoApiConfiguratio
 		actModeHuaweiCloudMaasModelInfo: convertProtoToModelInfo(protoConfig.actModeHuaweiCloudMaasModelInfo),
 		actModeVercelAiGatewayModelId: protoConfig.actModeVercelAiGatewayModelId,
 		actModeVercelAiGatewayModelInfo: convertProtoToModelInfo(protoConfig.actModeVercelAiGatewayModelInfo),
+		actModePoolsideModelId: protoConfig.actModePoolsideModelId,
+		actModePoolsideModelInfo: convertProtoToModelInfo(protoConfig.actModePoolsideModelInfo),
 
 		// Favorited model IDs
 		favoritedModelIds:

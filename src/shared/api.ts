@@ -36,6 +36,7 @@ export type ApiProvider =
 	| "baseten"
 	| "vercel-ai-gateway"
 	| "zai"
+	| "poolside"
 
 export interface ApiHandlerOptions {
 	// Global configuration (not mode-specific)
@@ -110,6 +111,8 @@ export interface ApiHandlerOptions {
 	difyBaseUrl?: string
 	zaiApiKey?: string
 	zaiApiLine?: string
+	poolsideApiKey?: string
+	poolsideBaseUrl?: string
 	onRetryAttempt?: (attempt: number, maxRetries: number, delay: number, error: any) => void
 	// Plan mode configurations
 	planModeApiModelId?: string
@@ -141,6 +144,8 @@ export interface ApiHandlerOptions {
 	planModeHuaweiCloudMaasModelInfo?: ModelInfo
 	planModeVercelAiGatewayModelId?: string
 	planModeVercelAiGatewayModelInfo?: ModelInfo
+	planModePoolsideModelId?: string
+	planModePoolsideModelInfo?: OpenAiCompatibleModelInfo
 	// Act mode configurations
 
 	actModeApiModelId?: string
@@ -172,6 +177,8 @@ export interface ApiHandlerOptions {
 	actModeHuaweiCloudMaasModelInfo?: ModelInfo
 	actModeVercelAiGatewayModelId?: string
 	actModeVercelAiGatewayModelInfo?: ModelInfo
+	actModePoolsideModelId?: string
+	actModePoolsideModelInfo?: OpenAiCompatibleModelInfo
 }
 
 export type ApiConfiguration = ApiHandlerOptions & {
@@ -3503,3 +3510,14 @@ export const qwenCodeModels = {
 } as const satisfies Record<string, ModelInfo>
 export type QwenCodeModelId = keyof typeof qwenCodeModels
 export const qwenCodeDefaultModelId: QwenCodeModelId = "qwen3-coder-plus"
+
+export const poolsideModelInfoSaneDefaults: OpenAiCompatibleModelInfo = {
+	maxTokens: -1,
+	contextWindow: 128_000,
+	supportsImages: false,
+	supportsPromptCache: false,
+	isR1FormatRequired: false,
+	inputPrice: 0,
+	outputPrice: 0,
+	temperature: 0,
+}
