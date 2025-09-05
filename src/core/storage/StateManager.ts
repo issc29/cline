@@ -837,6 +837,8 @@ export class StateManager {
 			planModeHuaweiCloudMaasModelInfo,
 			planModeVercelAiGatewayModelId,
 			planModeVercelAiGatewayModelInfo,
+			planModePoolsideModelId,
+			planModePoolsideModelInfo,
 
 			// Act mode configuration updates
 			actModeApiProvider,
@@ -911,8 +913,6 @@ export class StateManager {
 			difyBaseUrl,
 			qwenCodeOauthPath,
 			poolsideBaseUrl,
-			planModePoolsideModelId,
-			planModePoolsideModelInfo,
 		} satisfies GlobalState
 
 		// Populate global state cache directly

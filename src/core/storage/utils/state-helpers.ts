@@ -74,6 +74,7 @@ export async function readStateFromDisk(context: ExtensionContext) {
 	const preferredLanguage = context.globalState.get("preferredLanguage") as string | undefined
 	const focusChainSettings = context.globalState.get("focusChainSettings") as FocusChainSettings | undefined
 	const focusChainFeatureFlagEnabled = context.globalState.get("focusChainFeatureFlagEnabled") as boolean | undefined
+	const poolsideBaseUrl = context.globalState.get("poolsideBaseUrl") as string | undefined
 
 	// Get all secret values
 	const [
@@ -111,6 +112,7 @@ export async function readStateFromDisk(context: ExtensionContext) {
 		ollamaApiKey,
 		vercelAiGatewayApiKey,
 		difyApiKey,
+		poolsideApiKey,
 	] = await Promise.all([
 		context.secrets.get("apiKey") as Promise<string | undefined>,
 		context.secrets.get("openRouterApiKey") as Promise<string | undefined>,
@@ -146,6 +148,7 @@ export async function readStateFromDisk(context: ExtensionContext) {
 		context.secrets.get("ollamaApiKey") as Promise<string | undefined>,
 		context.secrets.get("vercelAiGatewayApiKey") as Promise<string | undefined>,
 		context.secrets.get("difyApiKey") as Promise<string | undefined>,
+		context.secrets.get("poolsideApiKey") as Promise<string | undefined>,
 	])
 
 	const localClineRulesToggles = context.workspaceState.get("localClineRulesToggles") as ClineRulesToggles | undefined
@@ -191,6 +194,8 @@ export async function readStateFromDisk(context: ExtensionContext) {
 	const planModeBasetenModelInfo = context.globalState.get("planModeBasetenModelInfo") as ModelInfo | undefined
 	const planModeVercelAiGatewayModelId = context.globalState.get("planModeVercelAiGatewayModelId") as string | undefined
 	const planModeVercelAiGatewayModelInfo = context.globalState.get("planModeVercelAiGatewayModelInfo") as ModelInfo | undefined
+	const planModePoolsideModelId = context.globalState.get("planModePoolsideModelId") as string | undefined
+	const planModePoolsideModelInfo = context.globalState.get("planModePoolsideModelInfo") as ModelInfo | undefined
 	// Act mode configurations
 	const actModeApiProvider = context.globalState.get("actModeApiProvider") as ApiProvider | undefined
 	const actModeApiModelId = context.globalState.get("actModeApiModelId") as string | undefined
@@ -226,6 +231,8 @@ export async function readStateFromDisk(context: ExtensionContext) {
 	const actModeBasetenModelInfo = context.globalState.get("actModeBasetenModelInfo") as ModelInfo | undefined
 	const actModeVercelAiGatewayModelId = context.globalState.get("actModeVercelAiGatewayModelId") as string | undefined
 	const actModeVercelAiGatewayModelInfo = context.globalState.get("actModeVercelAiGatewayModelInfo") as ModelInfo | undefined
+	const actModePoolsideModelId = context.globalState.get("actModePoolsideModelId") as string | undefined
+	const actModePoolsideModelInfo = context.globalState.get("actModePoolsideModelInfo") as ModelInfo | undefined
 
 	let apiProvider: ApiProvider
 	if (planModeApiProvider) {
@@ -329,6 +336,8 @@ export async function readStateFromDisk(context: ExtensionContext) {
 			vercelAiGatewayApiKey,
 			difyApiKey,
 			difyBaseUrl,
+			poolsideApiKey,
+			poolsideBaseUrl,
 			// Plan mode configurations
 			planModeApiProvider: planModeApiProvider || apiProvider,
 			planModeApiModelId,
@@ -360,6 +369,8 @@ export async function readStateFromDisk(context: ExtensionContext) {
 			planModeBasetenModelInfo,
 			planModeVercelAiGatewayModelId,
 			planModeVercelAiGatewayModelInfo,
+			planModePoolsideModelId,
+			planModePoolsideModelInfo,
 			// Act mode configurations
 			actModeApiProvider: actModeApiProvider || apiProvider,
 			actModeApiModelId,
@@ -391,6 +402,8 @@ export async function readStateFromDisk(context: ExtensionContext) {
 			actModeBasetenModelInfo,
 			actModeVercelAiGatewayModelId,
 			actModeVercelAiGatewayModelInfo,
+			actModePoolsideModelId,
+			actModePoolsideModelInfo,
 		},
 		focusChainSettings: focusChainSettings || DEFAULT_FOCUS_CHAIN_SETTINGS,
 		focusChainFeatureFlagEnabled: focusChainFeatureFlagEnabled ?? false,
@@ -470,6 +483,7 @@ export async function resetGlobalState(controller: Controller) {
 		"vercelAiGatewayApiKey",
 		"zaiApiKey",
 		"difyApiKey",
+		"poolsideApiKey",
 	]
 	await Promise.all(secretKeys.map((key) => context.secrets.delete(key)))
 	await controller.stateManager.reInitialize()
